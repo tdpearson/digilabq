@@ -26,7 +26,7 @@ def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=No
 
     try:
         image = Image.open(inpath)
-    except OSError:
+    except (IOError, OSError):
         # workaround for Pillow unrecognized tiff image
         if inpath.split(".")[-1].upper() in ["TIF", "TIFF"]:
             with NamedTemporaryFile() as tmpfile:
