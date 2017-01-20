@@ -61,13 +61,13 @@ def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=No
     resultDir = os.path.join(basedir, 'oulib_tasks/', task_id)
     os.makedirs(resultDir)
 
-    _preocessimage( inpath=os.path.join(basedir, inpath),
-                    outpath=os.path.join(basefir, outpath),
-                    outformat=outformat,
-                    filter=filter,
-                    scale=scale,
-                    crop=crop
-                  )
+    _processimage( inpath=os.path.join(basedir, inpath),
+                   outpath=os.path.join(basefir, outpath),
+                   outformat=outformat,
+                   filter=filter,
+                   scale=scale,
+                   crop=crop
+                 )
 
     return "{0}/oulib_tasks/{1}".format(hostname,task_id)
 
