@@ -41,7 +41,7 @@ def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=No
         # workaround for Pillow unrecognized tiff image
         if inpath.split(".")[-1].upper() in ["TIF", "TIFF"]:
             with NamedTemporaryFile() as tmpfile:
-                check_call(("tiff2rgba", inpath, tmpfile.name))
+                check_call(("tiff2rgba", os.path.join(basedir, inpath), tmpfile.name))
                 image = Image.open(tmpfile.name)
         else:
             raise Exception
