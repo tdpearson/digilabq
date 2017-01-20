@@ -1,7 +1,7 @@
 from celery.task import task
-from celery.task.sets import TaskSet
-from celery.exceptions import Ignore
-from celery import states
+#from celery.task.sets import TaskSet
+#from celery.exceptions import Ignore
+#from celery import states
 from dockertask import docker_task
 from subprocess import check_call
 from tempfile import NamedTemporaryFile
@@ -30,7 +30,7 @@ def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=No
       crop - list of coordinates to crop from - i.e. [10,10,200,200]
     """
 
-    task_id = str(proessimage.request.id)
+    task_id = str(processimage.request.id)
     #create Result Directory
     resultDir = os.path.join(basedir, 'oulib_tasks/', task_id)
     os.makedirs(resultDir)
