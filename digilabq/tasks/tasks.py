@@ -12,7 +12,7 @@ from PIL import Image
 
 
 @task()
-def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=None):
+def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=None, crop=None):
     """
     Digilab TIFF derivative Task
 
@@ -22,6 +22,7 @@ def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=No
       outformat - string representation of image format - default is "TIFF"
       scale - percentage to scale by represented as a decimal
       filter - string representing filter to apply to resized image - default is "ANTIALIAS"
+      crop - list of coordinates to crop from - i.e. (10,10,200,200)
     """
 
     try:
@@ -34,6 +35,9 @@ def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=No
                 image = Image.open(tmpfile.name)
         else:
             raise Exception
+
+    if crop:
+        image = image.crop(crop)
 
     if scale:
         imagefilter = getattr(Image, filter.upper())
