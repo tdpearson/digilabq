@@ -62,7 +62,7 @@ def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=No
     os.makedirs(resultDir)
 
     _processimage( inpath=os.path.join(basedir, inpath),
-                   outpath=os.path.join(basefir, outpath),
+                   outpath=os.path.join(basedir, outpath),
                    outformat=outformat,
                    filter=filter,
                    scale=scale,
