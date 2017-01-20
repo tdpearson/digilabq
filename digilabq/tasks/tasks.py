@@ -1,4 +1,7 @@
 from celery.task import task
+from celery.task.sets import TaskSet
+from celery.exceptions import Ignore
+from celery import states
 from dockertask import docker_task
 from subprocess import check_call
 from tempfile import NamedTemporaryFile
