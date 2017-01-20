@@ -58,11 +58,11 @@ def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=No
     
     task_id = str(processimage.request.id)
     #create Result Directory
-    resultDir = os.path.join(basedir, 'oulib_tasks/', task_id)
-    os.makedirs(resultDir)
+    resultdir = os.path.join(basedir, 'oulib_tasks/', task_id)
+    os.makedirs(resultdir)
 
     _processimage( inpath=os.path.join(basedir, inpath),
-                   outpath=os.path.join(basedir, outpath),
+                   outpath=os.path.join(resultdir, outpath),
                    outformat=outformat,
                    filter=filter,
                    scale=scale,
