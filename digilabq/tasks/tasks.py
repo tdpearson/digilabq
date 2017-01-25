@@ -6,7 +6,7 @@ from tempfile import NamedTemporaryFile
 import os
 
 #Default base directory
-basedir = "/data/static"
+basedir = "/data/static/"
 hostname = "http://localhost"
 
 #imagemagick needs to be installed within the docker container
