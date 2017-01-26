@@ -22,15 +22,15 @@ def _processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=N
         image = Image.open(inpath)
     except (IOError, OSError):
         # workaround for Pillow not handling 16bit sRGB images
-        prevout, sys.stdout = sys.stdout, BytesIO()
-        return check_output(("identify", inpath))
-        if "16-bit sRGB" in check_output(("identify", inpath)):
+        #prevout, sys.stdout = sys.stdout, BytesIO()
+        #return check_output(("identify", inpath))
+        if "16-bit" in check_output(("identify", inpath)):
             with NamedTemporaryFile() as tmpfile:
                 check_call(("convert", inpath, "-depth", "8", tmpfile.name))
                 image = Image.open(tmpfile.name)
         else:
             raise Exception
-        sys.stdout = prevout
+        #sys.stdout = prevout
 
     if crop:
         image = image.crop(crop)
