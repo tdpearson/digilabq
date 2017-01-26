@@ -3,8 +3,6 @@ from dockertask import docker_task
 from PIL import Image
 from subprocess import check_call, check_output
 from tempfile import NamedTemporaryFile
-from io import BytesIO
-import sys
 import os
 
 #Default base directory
@@ -22,15 +20,12 @@ def _processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=N
         image = Image.open(inpath)
     except (IOError, OSError):
         # workaround for Pillow not handling 16bit sRGB images
-        #prevout, sys.stdout = sys.stdout, BytesIO()
-        #return check_output(("identify", inpath))
         if "16-bit" in check_output(("identify", inpath)):
             with NamedTemporaryFile() as tmpfile:
                 check_call(("convert", inpath, "-depth", "8", tmpfile.name))
                 image = Image.open(tmpfile.name)
         else:
             raise Exception
-        #sys.stdout = prevout
 
     if crop:
         image = image.crop(crop)
@@ -62,12 +57,12 @@ def processimage(inpath, outpath, outformat="TIFF", filter="ANTIALIAS", scale=No
     resultpath = os.path.join(basedir, 'oulib_tasks/', task_id)
     os.makedirs(resultpath)
 
-    return _processimage(inpath=os.path.join(basedir, inpath),
-                         outpath=os.path.join(basedir, outpath),
-                         outformat=outformat,
-                         filter=filter,
-                         scale=scale,
-                         crop=crop
-                         )
+    _processimage(inpath=os.path.join(basedir, inpath),
+                  outpath=os.path.join(resultpath, outpath),
+                  outformat=outformat,
+                  filter=filter,
+                  scale=scale,
+                  crop=crop
+                  )
  
-    #return "{0}/oulib_tasks/{1}".format(hostname, task_id)
+    return "{0}/oulib_tasks/{1}".format(hostname, task_id)
